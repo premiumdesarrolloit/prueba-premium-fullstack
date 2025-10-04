@@ -9,6 +9,7 @@ import { envValidationSchema } from './config/env.validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { CoursesModule } from './courses/courses.module';
+import { CommonModule } from './common/common.module';
 
 function envFiles() {
   const env = process.env.NODE_ENV ?? 'development';
@@ -51,6 +52,8 @@ function envFiles() {
     AuthModule,
 
     CoursesModule,
+
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
