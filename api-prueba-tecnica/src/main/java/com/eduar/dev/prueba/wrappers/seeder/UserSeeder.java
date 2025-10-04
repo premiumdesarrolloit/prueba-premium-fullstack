@@ -31,15 +31,26 @@ public class UserSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (userRepository.count() == 0) {
-            Optional<Role> adminRole = roleRepository.findByName("ADMIN");
+            Optional<Role> adminRole = roleRepository.findByName("ROLE_ADMIN");
+            Optional<Role> userRole = roleRepository.findByName("ROLE_USER");
 
             if (adminRole.isPresent()) {
-                UserDto user = new UserDto();
-                user.setEmail("root@admin.com");
-                user.setPassword("root.admin");
-                user.setRoles(Set.of(adminRole.get().getId()));
+                UserDto userAdmin = new UserDto();
 
-                this.authenticationService.registerUser(user);
+                userAdmin.setEmail("root@admin.com");
+                userAdmin.setPassword("root.admin");
+                userAdmin.setRoles(Set.of(adminRole.get().getId()));
+
+                this.authenticationService.registerUser(userAdmin);
+            }
+
+            if (userRole.isPresent()) {
+                UserDto userUser = new UserDto();
+                userUser.setEmail("user@user.com");
+                userUser.setPassword("user.user");
+                userUser.setRoles(Set.of(userRole.get().getId()));
+
+                this.authenticationService.registerUser(userUser);
             }
 
         }

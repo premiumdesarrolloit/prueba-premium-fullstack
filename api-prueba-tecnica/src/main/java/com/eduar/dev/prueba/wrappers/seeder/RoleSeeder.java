@@ -24,8 +24,8 @@ public class RoleSeeder implements CommandLineRunner {
             // Cargar roles y asociar permisos
             Role rolAdmin = new Role();
             Role rolUser = new Role();
-            rolAdmin.setNombre("ADMIN");
-            rolUser.setNombre("USER");
+            rolAdmin.setNombre("ROLE_ADMIN");
+            rolUser.setNombre("ROLE_USER");
 
 
             roleRepository.save(rolAdmin);
