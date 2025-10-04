@@ -1,0 +1,36 @@
+version: '3.1'
+services:
+
+  nestjs-app:
+    build:
+      context: ../../
+      dockerfile: docker/Dockerfile
+    container_name: dev-nestjs-app-container
+    env_file:
+      - ../.env.development
+    volumes:
+      - /app/node_modules
+      - ../:/app
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    networks:
+      - prueba-premium-app-network
+
+  postgres-db:
+    image: postgres:14.3
+    ports:
+      - 5432:5432
+    env_file:
+      - ../.env.development
+    container_name: dev-postgresql-db-container
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - prueba-premium-app-network
+
+networks:
+  prueba-premium-app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
