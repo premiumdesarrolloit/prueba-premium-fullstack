@@ -3,7 +3,7 @@ services:
 
   nestjs-app:
     build:
-      context: ../../
+      context: ../
       dockerfile: docker/Dockerfile
     container_name: dev-nestjs-app-container
     env_file:
