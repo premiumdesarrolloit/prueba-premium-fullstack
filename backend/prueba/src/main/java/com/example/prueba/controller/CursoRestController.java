@@ -24,38 +24,41 @@ public class CursoRestController {
 
     @GetMapping
     public List<Curso> listarCursos() {
-        return cursoService.obtenerTodos();
+        return cursoService.obtenerTodosIndice();
     }
 
 
     @GetMapping("/{id}")
-    public Optional<Curso> obtenerProducto(@PathVariable Long id) {
+    public Optional<Curso> obtenerCurso(@PathVariable Long id) {
         return cursoService.obtenerPorId(id);
     }
 
     @PostMapping
-    public Curso guardarProducto(@RequestBody Curso producto) {
-        return cursoService.guardar(producto);
-    }
-
-    // Actualizar curso
-    @PutMapping("/{id}")
-    public Curso actualizarProducto(@PathVariable Long id, @RequestBody Curso curso) {
-        curso.setId(id);
+    public Curso guardarCurso(@RequestBody Curso curso) {
+        double indiceCalidad = (curso.getPuntuacionPromedio() * 10) + (Math.log10(curso.getInscritos() + 1) * 5);
+        curso.setIndiceCalidad(indiceCalidad);
         return cursoService.guardar(curso);
     }
 
-    // Eliminar producto y retornar el eliminado
+
+    @PutMapping("/{id}")
+    public Curso actualizarCurso(@PathVariable Long id, @RequestBody Curso curso) {
+        curso.setId(id);
+         double indiceCalidad = (curso.getPuntuacionPromedio() * 10) + (Math.log10(curso.getInscritos() + 1) * 5);
+        curso.setIndiceCalidad(indiceCalidad);
+        return cursoService.guardar(curso);
+    }
+
+
     @DeleteMapping("/{id}")
-    public Optional<Curso> eliminarProducto(@PathVariable Long id) {
+    public Optional<Curso> eliminarCurso(@PathVariable Long id) {
         Optional<Curso> curso = cursoService.obtenerPorId(id);
         cursoService.eliminar(id);
         return curso;
     }
 
-    // Buscar productos por nombre
     @GetMapping("/buscar")
-    public List<Curso> buscarProductos(@RequestParam String nombre) {
+    public List<Curso> buscarCursos(@RequestParam String nombre) {
         return cursoService.buscarPorNombre(nombre);
     }
 }

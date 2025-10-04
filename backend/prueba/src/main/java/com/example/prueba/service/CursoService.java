@@ -18,6 +18,10 @@ public class CursoService {
     public List<Curso> obtenerTodos() {
         return cursoRepository.findAll();
     }
+      public List<Curso> obtenerTodosIndice() {
+        return cursoRepository.findAllOrderByIndiceCalidadDesc();
+    }
+    
     
 
     public Optional<Curso> obtenerPorId(Long id) {
