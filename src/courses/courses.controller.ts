@@ -13,7 +13,7 @@ export class CoursesController {
     constructor(private readonly coursesService: CoursesService) {}
 
     @Get()
-    @Auth()
+    @Auth( ValidRoles.user )
     findAll( @Query() paginationDto: PaginationDto ) {
         return this.coursesService.findAll( paginationDto );
     }

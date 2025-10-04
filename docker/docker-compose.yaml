@@ -7,7 +7,7 @@ services:
       dockerfile: docker/Dockerfile
     container_name: dev-nestjs-app-container
     env_file:
-      - ../.env.development
+      - ../.env
     volumes:
       - /app/node_modules
       - ../:/app
@@ -21,7 +21,7 @@ services:
     ports:
       - 5432:5432
     env_file:
-      - ../.env.development
+      - ../.env
     container_name: dev-postgresql-db-container
     volumes:
       - postgres_data:/var/lib/postgresql/data

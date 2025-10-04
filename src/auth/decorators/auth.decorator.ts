@@ -8,6 +8,7 @@ import { ValidRoles } from '../interfaces/valid-roles.interface';
 export function Auth(...roles: ValidRoles[]) {
   return applyDecorators(
     RoleProtected(...roles),
-    UseGuards( AuthGuard(), UserRoleGuard ),
+    UseGuards( AuthGuard(), UserRoleGuard )
+    // UseGuards( UserRoleGuard )
   );
 }
