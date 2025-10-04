@@ -29,8 +29,13 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody Map<String, String> body) {
         String user = body.get("username");
         String pass = body.get("password");
+        String rolIdStr = body.get("rolId"); // <- extraemos rolId del JSON
 
-        AppUser nuevo = userService.register(user, pass);
+    Long rolId = (rolIdStr != null) ? Long.parseLong(rolIdStr) : null;
+
+    AppUser nuevo = userService.register(user, pass, rolId);
+
+
         return ResponseEntity.ok(nuevo);
     }
 

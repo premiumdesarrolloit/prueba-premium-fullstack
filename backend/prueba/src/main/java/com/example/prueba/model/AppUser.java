@@ -2,6 +2,10 @@ package com.example.prueba.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
+import com.example.prueba.model.Rol;
+
 @Entity
 @Table(name = "usuarios")
 public class AppUser {
@@ -23,6 +27,14 @@ public class AppUser {
         this.username = username;
         this.password = password;
     }
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "usuario_roles",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Rol> roles;
 
     // Getters y Setters
     public Long getId() {
@@ -47,5 +59,13 @@ public class AppUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Rol> roles) {
+        this.roles = roles;
     }
 }

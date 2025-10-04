@@ -28,17 +28,17 @@ public class CursoService {
         return cursoRepository.findById(id);
     }
     
-    // Guardar producto (crear o actualizar)
+    // Guardar curso (crear o actualizar)
     public Curso guardar(Curso curso) {
         return cursoRepository.save(curso);
     }
     
-    // Eliminar producto
+    // Eliminar curso
     public void eliminar(Long id) {
         cursoRepository.deleteById(id);
     }
     
-    // Buscar productos por nombre
+    // Buscar cursos por nombre
     public List<Curso> buscarPorNombre(String nombre) {
         return cursoRepository.findByNombreContainingIgnoreCase(nombre);
     }
