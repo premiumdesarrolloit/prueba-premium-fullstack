@@ -32,6 +32,22 @@
 $ npm install
 ```
 
+## ENV configuration
+
+Make sure to create the **.env** with the required values:
+
+```bash
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+```
+
 ## Compile and run the project
 
 ```bash
@@ -97,3 +113,34 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Run this application with Docker
+
+Make sure to create the **.env** with the required values:
+
+```bash
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+```
+
+## Run Docker Compose
+
+```bash
+$ docker-compose -f docker/docker-compose.yaml up -d
+```
+
+You can check the backend application in **http://localhost:3000/api**.
+Also there's a docker container running PostgreSQL so you can connect with your DBM via **localhost** in port **5432**.
+
+## Stop & Remove containers
+
+```bash
+$ docker-compose -f docker/docker-compose.yaml down
+```
