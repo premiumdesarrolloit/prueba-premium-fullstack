@@ -5,6 +5,8 @@ import { Auth } from 'src/auth/decorators/auth.decorator';
 import { ValidRoles } from 'src/auth/interfaces/valid-roles.interface';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
+import { RateCourseDto } from './dto/rate-course.dto';
+import { EnrollCourseDto } from './dto/enroll-course.dto';
 
 @Controller('courses')
 export class CoursesController {
@@ -42,5 +44,22 @@ export class CoursesController {
     @Auth( ValidRoles.admin )
     remove(@Param('id', ParseUUIDPipe ) id: string) {
         return this.coursesService.remove( id );
+    }
+
+    @Post()
+    @Auth()
+    enrollCourse(
+        @Body() enrollCourseDto: EnrollCourseDto,
+    ) {
+        return this.coursesService.enroll( enrollCourseDto );
+    }
+
+    @Post()
+    @Auth()
+    rateCourse(
+        @Param('id', ParseUUIDPipe ) id: string,
+        @Body() rateCourseDto: RateCourseDto,
+    ) {
+        return this.coursesService.rate( id, rateCourseDto );
     }
 }

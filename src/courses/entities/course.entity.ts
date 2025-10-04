@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/auth/entities/user.entity';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 
 @Entity('cursos')
@@ -23,4 +24,11 @@ export class Course {
     
     @Column('decimal')
     indiceCalidad: number;
+
+    @ManyToMany(
+        () => User,
+        ( user ) => user.courses,
+        { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' }
+    )
+    users: User[]
 }

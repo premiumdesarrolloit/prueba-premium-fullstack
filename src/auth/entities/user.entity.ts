@@ -1,4 +1,5 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Course } from 'src/courses/entities/course.entity';
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 
 @Entity('users')
@@ -30,6 +31,24 @@ export class User {
         default: ['user']
     })
     roles: string[];
+
+    @ManyToMany(
+        () => Course,
+        (course) => course.users,
+        { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' }
+    )
+    @JoinTable({
+        name: 'user_course',
+        joinColumn: {
+            name: 'user_id',
+            referencedColumnName: 'id',
+        },
+        inverseJoinColumn: {
+            name: 'course_id',
+            referencedColumnName: 'id',
+        },
+    })
+    courses: Course[]
 
     @BeforeInsert()
     checkFieldsBeforeInsert() {

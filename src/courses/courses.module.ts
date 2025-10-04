@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CoursesService } from './courses.service';
 import { CoursesController } from './courses.controller';
 import { AuthModule } from 'src/auth/auth.module';
+import { UserCourse } from './entities/user-course.entity';
 
 @Module({
     imports: [
@@ -12,7 +13,7 @@ import { AuthModule } from 'src/auth/auth.module';
 
         AuthModule,
 
-        TypeOrmModule.forFeature([ Course ]),
+        TypeOrmModule.forFeature([ Course, UserCourse ]),
     ],
     providers: [CoursesService],
     controllers: [CoursesController]
